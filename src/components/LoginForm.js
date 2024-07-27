@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import AuthContext from "../auth/AuthContext";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 const style = {
   bgcolor: "background.paper",
   display: "flex",
@@ -23,8 +22,8 @@ const style = {
 };
 
 function LoginForm({ callback }) {
-  const [username] = useState("trancaodua");
-  const [password] = useState("123");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +32,7 @@ function LoginForm({ callback }) {
     event.preventDefault();
   };
   const handleLogin = () => {
-    auth.singin(username, callback);
+    auth.singin(username, callback); // Ensure the method name matches exactly
   };
 
   return (
@@ -42,19 +41,19 @@ function LoginForm({ callback }) {
         Login
       </Typography>
       <TextField
-        disabled
         label="Username"
-        default="user"
         value={username}
+        color="warning"
+        onChange={(e) => setUsername(e.target.value)}
         sx={{ m: 1 }}
       />
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1 }} variant="outlined" color="warning">
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput
-          disabled
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
           value={password}
+          onChange={(e) => setPassword(e.target.value)}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
